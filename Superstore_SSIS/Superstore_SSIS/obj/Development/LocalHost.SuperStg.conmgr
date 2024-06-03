@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="LocalHost.SuperStg"
+  DTS:DTSID="{4CE6B107-B053-45B6-BA71-8B8599323726}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=.;Initial Catalog=SuperStg;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Superstore_SSIS-{4CE6B107-B053-45B6-BA71-8B8599323726}LocalHost.SuperStg;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,2776 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/21/2024 6:21:45 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="QUOC-VIET"
+  DTS:CreatorName="QUOC-VIET\Admin"
+  DTS:DTSID="{7ACA4AA2-A8FE-4416-B622-EEA2F7947103}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stage_Dim"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{B4802D78-6EF7-4CB5-97DE-28DEFF93D7EC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{15C99047-9F67-4666-AA6D-AF87FB119133}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE6B107-B053-45B6-BA71-8B8599323726}"
+          SQLTask:SqlStatementSource="Truncate table stgOrderDate&#xA;Truncate table stgProducts&#xA;Truncate table stgShipDate&#xA;Truncate table stgCustomer&#xA;Truncate table stgOrder" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Custumer"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7C871BFD-109E-4864-9294-9946AA477F2F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Custumer"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Custumer\DST – stgCustomer"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST – stgCustomer"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Custumer\DST – stgCustomer.Connections[OleDbConnection]"
+                  connectionManagerID="{4CE6B107-B053-45B6-BA71-8B8599323726}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.SuperStg]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[Customer_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Customer_ID"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Customer_ID]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Customer_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[Customer_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Customer_Name"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Customer_Name]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Customer_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[Segment]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Segment"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Segment]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Segment]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[Postal_Code]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Postal_Code"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Postal_Code]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Postal_Code]" />
+                    <inputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Region]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Customer_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="Customer_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Customer_Name]"
+                      dataType="wstr"
+                      length="40"
+                      name="Customer_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Segment]"
+                      dataType="wstr"
+                      length="30"
+                      name="Segment" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="40"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="30"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Postal_Code]"
+                      dataType="wstr"
+                      length="10"
+                      name="Postal_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      name="Region" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Custumer\DST – stgCustomer.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Custumer\DST – stgCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\DST – stgCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Custumer\DST – stgCustomer.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Custumer\SRC – SuperStore_Customer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC – SuperStore_Customer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT Customer_ID, Customer_Name, Segment, Country, City, State, Postal_Code, Region
+FROM     dbo.SampleSuperstore</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Custumer\SRC – SuperStore_Customer.Connections[OleDbConnection]"
+                  connectionManagerID="{59A5A9A2-3FE2-488E-AC79-90DD64E77441}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.ExternalSources]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Customer_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Customer_ID]"
+                      length="30"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Customer_ID]"
+                      name="Customer_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Customer_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Customer_Name]"
+                      length="40"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Customer_Name]"
+                      name="Customer_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Segment]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Segment]"
+                      length="30"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Segment]"
+                      name="Segment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="15"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="40"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="30"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Postal_Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Postal_Code]"
+                      length="10"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Postal_Code]"
+                      name="Postal_Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Region]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="15"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Customer_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="Customer_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Customer_Name]"
+                      dataType="wstr"
+                      length="40"
+                      name="Customer_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Segment]"
+                      dataType="wstr"
+                      length="30"
+                      name="Segment" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="40"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="30"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Postal_Code]"
+                      dataType="wstr"
+                      length="10"
+                      name="Postal_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      name="Region" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Customer_ID]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Customer_ID]"
+                      name="Customer_ID" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Customer_Name]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Customer_Name]"
+                      name="Customer_Name" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Segment]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Segment]"
+                      name="Segment" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Postal_Code]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Postal_Code]"
+                      name="Postal_Code" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Custumer.Paths[OLE DB Source Output]"
+              endId="Package\Stage Custumer\DST – stgCustomer.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Custumer\SRC – SuperStore_Customer.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Order"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A6331150-C29E-4D06-B179-8C68947083A2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Order"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Order\DST - stgOrder"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST - stgOrder"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgOrder]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Order\DST - stgOrder.Connections[OleDbConnection]"
+                  connectionManagerID="{4CE6B107-B053-45B6-BA71-8B8599323726}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.SuperStg]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input].Columns[Order_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Order_ID"
+                      externalMetadataColumnId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input].ExternalColumns[Order_ID]"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].Columns[Order_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input].Columns[Ship_Mode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Ship_Mode"
+                      externalMetadataColumnId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input].ExternalColumns[Ship_Mode]"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].Columns[Ship_Mode]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input].ExternalColumns[Order_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="Order_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input].ExternalColumns[Ship_Mode]"
+                      dataType="wstr"
+                      length="20"
+                      name="Ship_Mode" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Order\DST - stgOrder.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Order\DST - stgOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Order\DST - stgOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Order\DST - stgOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Order\DST - stgOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Order\SRC – SuperStore_Order"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC – SuperStore_Order"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT Order_ID, Ship_Mode
+FROM     dbo.SampleSuperstore</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Order\SRC – SuperStore_Order.Connections[OleDbConnection]"
+                  connectionManagerID="{59A5A9A2-3FE2-488E-AC79-90DD64E77441}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.ExternalSources]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].Columns[Order_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].ExternalColumns[Order_ID]"
+                      length="30"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].Columns[Order_ID]"
+                      name="Order_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].Columns[Ship_Mode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].ExternalColumns[Ship_Mode]"
+                      length="20"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].Columns[Ship_Mode]"
+                      name="Ship_Mode"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].ExternalColumns[Order_ID]"
+                      dataType="wstr"
+                      length="30"
+                      name="Order_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output].ExternalColumns[Ship_Mode]"
+                      dataType="wstr"
+                      length="20"
+                      name="Ship_Mode" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[Order_ID]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[Order_ID]"
+                      name="Order_ID" />
+                    <outputColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[Ship_Mode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[Ship_Mode]"
+                      name="Ship_Mode" />
+                    <outputColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Order.Paths[OLE DB Source Output]"
+              endId="Package\Stage Order\DST - stgOrder.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Order\SRC – SuperStore_Order.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage OrderDate"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D63916B0-163A-4D8B-95C0-2A9515203D31}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage OrderDate"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage OrderDate\DST – stgOrderDate"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST – stgOrderDate"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgOrderDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage OrderDate\DST – stgOrderDate.Connections[OleDbConnection]"
+                  connectionManagerID="{4CE6B107-B053-45B6-BA71-8B8599323726}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.SuperStg]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[Order_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Order_Date"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[Order_Date]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Order_Date]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[DayOfWeek]"
+                      cachedDataType="i4"
+                      cachedName="DayOfWeek"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfWeek]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[DayOfMonth]"
+                      cachedDataType="i4"
+                      cachedName="DayOfMonth"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfMonth]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[DayOfYear]"
+                      cachedDataType="i4"
+                      cachedName="DayOfYear"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfYear]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfYear]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[WeekOfYear]"
+                      cachedDataType="i4"
+                      cachedName="WeekOfYear"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[WeekOfYear]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[WeekOfYear]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[MonthOfYear]"
+                      cachedDataType="i4"
+                      cachedName="MonthOfYear"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfYear]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[MonthOfYear]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[Quarter]"
+                      cachedDataType="i4"
+                      cachedName="Quarter"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Quarter]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[Year]"
+                      cachedDataType="i4"
+                      cachedName="Year"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Year]" />
+                    <inputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].Columns[IsWeekDay]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="IsWeekDay"
+                      externalMetadataColumnId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[IsWeekDay]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[IsWeekDay]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[Order_Date]"
+                      dataType="dbTimeStamp"
+                      name="Order_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
+                      dataType="i4"
+                      name="DayOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
+                      dataType="i4"
+                      name="DayOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfYear]"
+                      dataType="i4"
+                      name="DayOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[WeekOfYear]"
+                      dataType="i4"
+                      name="WeekOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfYear]"
+                      dataType="i4"
+                      name="MonthOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      dataType="i4"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                      dataType="i4"
+                      name="Year" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input].ExternalColumns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IsWeekDay" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage OrderDate\DST – stgOrderDate.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\DST – stgOrderDate.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\DST – stgOrderDate.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\DST – stgOrderDate.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC – SuperStore_OrderDate"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT Order_Date, 
+                (Day("Order_Date") + MONTH("Order_Date") * 100 + YEAR("Order_Date") *
+10000 ) as DateKey,
+                DATEPART(WEEKDAY, Order_Date) AS DayOfWeek, 
+                DATEPART(DAY, Order_Date) AS DayOfMonth, 
+                DATEPART(DAYOFYEAR, Order_Date) AS DayOfYear, 
+                DATEPART(WEEK, Order_Date) AS WeekOfYear, 
+                DATEPART(MONTH, Order_Date) AS MonthOfYear, 
+                DATEPART(QUARTER, Order_Date) AS Quarter, 
+                DATEPART(YEAR, Order_Date) AS "Year", 
+                CASE WHEN DATEPART(WEEKDAY, Order_Date) IN (1, 7) THEN 'N' ELSE 'Y' END AS IsWeekDay 
+FROM dbo.SampleSuperstore
+Order by Order_Date</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Connections[OleDbConnection]"
+                  connectionManagerID="{59A5A9A2-3FE2-488E-AC79-90DD64E77441}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.ExternalSources]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Order_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[Order_Date]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Order_Date]"
+                      name="Order_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfWeek]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DayOfWeek]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfWeek]"
+                      name="DayOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfMonth]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DayOfMonth]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfMonth]"
+                      name="DayOfMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DayOfYear]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[DayOfYear]"
+                      name="DayOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[WeekOfYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[WeekOfYear]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[WeekOfYear]"
+                      name="WeekOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[MonthOfYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[MonthOfYear]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[MonthOfYear]"
+                      name="MonthOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Quarter]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[Quarter]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Quarter]"
+                      name="Quarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[Year]"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[Year]"
+                      name="Year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[IsWeekDay]"
+                      length="1"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].Columns[IsWeekDay]"
+                      name="IsWeekDay"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[Order_Date]"
+                      dataType="dbTimeStamp"
+                      name="Order_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DayOfWeek]"
+                      dataType="i4"
+                      name="DayOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DayOfMonth]"
+                      dataType="i4"
+                      name="DayOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[DayOfYear]"
+                      dataType="i4"
+                      name="DayOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[WeekOfYear]"
+                      dataType="i4"
+                      name="WeekOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[MonthOfYear]"
+                      dataType="i4"
+                      name="MonthOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[Quarter]"
+                      dataType="i4"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[Year]"
+                      dataType="i4"
+                      name="Year" />
+                    <externalMetadataColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output].ExternalColumns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IsWeekDay" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[Order_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[Order_Date]"
+                      name="Order_Date" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DayOfWeek]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DayOfWeek]"
+                      name="DayOfWeek" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DayOfMonth]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DayOfMonth]"
+                      name="DayOfMonth" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DayOfYear]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[DayOfYear]"
+                      name="DayOfYear" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[WeekOfYear]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[WeekOfYear]"
+                      name="WeekOfYear" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[MonthOfYear]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[MonthOfYear]"
+                      name="MonthOfYear" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[Quarter]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[Quarter]"
+                      name="Quarter" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[Year]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[Year]"
+                      name="Year" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[IsWeekDay]"
+                      name="IsWeekDay" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage OrderDate.Paths[OLE DB Source Output]"
+              endId="Package\Stage OrderDate\DST – stgOrderDate.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage OrderDate\SRC – SuperStore_OrderDate.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Product"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8AB29BF5-2732-461B-BC09-5708A1CFA2CC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Product"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Product\DST – stgProducts"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST – stgProducts"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgProducts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Product\DST – stgProducts.Connections[OleDbConnection]"
+                  connectionManagerID="{4CE6B107-B053-45B6-BA71-8B8599323726}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.SuperStg]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].Columns[Product_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Product_ID"
+                      externalMetadataColumnId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Product_ID]"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Product_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].Columns[Category]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Category"
+                      externalMetadataColumnId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].Columns[Sub_Category]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Sub_Category"
+                      externalMetadataColumnId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Sub_Category]"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Sub_Category]" />
+                    <inputColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].Columns[Product_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Product_Name"
+                      externalMetadataColumnId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Product_Name]"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Product_Name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Product_ID]"
+                      dataType="wstr"
+                      length="40"
+                      name="Product_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="15"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Sub_Category]"
+                      dataType="wstr"
+                      length="40"
+                      name="Sub_Category" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input].ExternalColumns[Product_Name]"
+                      dataType="wstr"
+                      length="150"
+                      name="Product_Name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Product\DST – stgProducts.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Product\DST – stgProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Product\DST – stgProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Product\DST – stgProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Product\DST – stgProducts.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Product\SRC – SuperStore_Product"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC – SuperStore_Product"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT Product_ID, Category, Sub_Category, Product_Name
+FROM     dbo.SampleSuperstore</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Product\SRC – SuperStore_Product.Connections[OleDbConnection]"
+                  connectionManagerID="{59A5A9A2-3FE2-488E-AC79-90DD64E77441}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.ExternalSources]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Product_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Product_ID]"
+                      length="40"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Product_ID]"
+                      name="Product_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      length="15"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Sub_Category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Sub_Category]"
+                      length="40"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Sub_Category]"
+                      name="Sub_Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Product_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Product_Name]"
+                      length="150"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].Columns[Product_Name]"
+                      name="Product_Name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Product_ID]"
+                      dataType="wstr"
+                      length="40"
+                      name="Product_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="15"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Sub_Category]"
+                      dataType="wstr"
+                      length="40"
+                      name="Sub_Category" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output].ExternalColumns[Product_Name]"
+                      dataType="wstr"
+                      length="150"
+                      name="Product_Name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Product_ID]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Product_ID]"
+                      name="Product_ID" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Sub_Category]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Sub_Category]"
+                      name="Sub_Category" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Product_Name]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[Product_Name]"
+                      name="Product_Name" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Product.Paths[OLE DB Source Output]"
+              endId="Package\Stage Product\DST – stgProducts.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Product\SRC – SuperStore_Product.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage ShipDate"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E3EAA648-B41E-44E2-9077-78B2D3E05DCF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage ShipDate"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage ShipDate\DST – stgShipDate"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST – stgShipDate"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgShipDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage ShipDate\DST – stgShipDate.Connections[OleDbConnection]"
+                  connectionManagerID="{4CE6B107-B053-45B6-BA71-8B8599323726}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.SuperStg]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[Ship_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Ship_Date"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[Ship_Date]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Ship_Date]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[DayOfWeek]"
+                      cachedDataType="i4"
+                      cachedName="DayOfWeek"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfWeek]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[DayOfMonth]"
+                      cachedDataType="i4"
+                      cachedName="DayOfMonth"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfMonth]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[DayOfYear]"
+                      cachedDataType="i4"
+                      cachedName="DayOfYear"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfYear]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfYear]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[WeekOfYear]"
+                      cachedDataType="i4"
+                      cachedName="WeekOfYear"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[WeekOfYear]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[WeekOfYear]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[MonthOfYear]"
+                      cachedDataType="i4"
+                      cachedName="MonthOfYear"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfYear]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[MonthOfYear]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[Quarter]"
+                      cachedDataType="i4"
+                      cachedName="Quarter"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Quarter]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[Year]"
+                      cachedDataType="i4"
+                      cachedName="Year"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Year]" />
+                    <inputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].Columns[IsWeekDay]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="IsWeekDay"
+                      externalMetadataColumnId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[IsWeekDay]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[IsWeekDay]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[Ship_Date]"
+                      dataType="dbTimeStamp"
+                      name="Ship_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
+                      dataType="i4"
+                      name="DayOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfMonth]"
+                      dataType="i4"
+                      name="DayOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[DayOfYear]"
+                      dataType="i4"
+                      name="DayOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[WeekOfYear]"
+                      dataType="i4"
+                      name="WeekOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[MonthOfYear]"
+                      dataType="i4"
+                      name="MonthOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[Quarter]"
+                      dataType="i4"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[Year]"
+                      dataType="i4"
+                      name="Year" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input].ExternalColumns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IsWeekDay" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage ShipDate\DST – stgShipDate.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\DST – stgShipDate.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\DST – stgShipDate.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\DST – stgShipDate.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC – SuperStore_ShipOrder"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT Ship_Date, 
+                (Day("Ship_Date") + MONTH("Ship_Date") * 100 + YEAR("Ship_Date") *
+10000 ) as DateKey,
+                DATEPART(WEEKDAY, Ship_Date) AS DayOfWeek, 
+                DATEPART(DAY, Ship_Date) AS DayOfMonth, 
+                DATEPART(DAYOFYEAR, Ship_Date) AS DayOfYear, 
+                DATEPART(WEEK, Ship_Date) AS WeekOfYear, 
+                DATEPART(MONTH, Ship_Date) AS MonthOfYear, 
+                DATEPART(QUARTER, Ship_Date) AS Quarter, 
+                DATEPART(YEAR, Ship_Date) AS "Year", 
+                CASE WHEN DATEPART(WEEKDAY, Ship_Date) IN (1, 7) THEN 'N' ELSE 'Y' END AS IsWeekDay 
+FROM dbo.SampleSuperstore
+Order by Ship_Date</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Connections[OleDbConnection]"
+                  connectionManagerID="{59A5A9A2-3FE2-488E-AC79-90DD64E77441}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.ExternalSources]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Ship_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[Ship_Date]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Ship_Date]"
+                      name="Ship_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfWeek]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DayOfWeek]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfWeek]"
+                      name="DayOfWeek"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfMonth]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DayOfMonth]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfMonth]"
+                      name="DayOfMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DayOfYear]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[DayOfYear]"
+                      name="DayOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[WeekOfYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[WeekOfYear]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[WeekOfYear]"
+                      name="WeekOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[MonthOfYear]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[MonthOfYear]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[MonthOfYear]"
+                      name="MonthOfYear"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Quarter]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[Quarter]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Quarter]"
+                      name="Quarter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[Year]"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[Year]"
+                      name="Year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[IsWeekDay]"
+                      length="1"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].Columns[IsWeekDay]"
+                      name="IsWeekDay"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[Ship_Date]"
+                      dataType="dbTimeStamp"
+                      name="Ship_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DayOfWeek]"
+                      dataType="i4"
+                      name="DayOfWeek" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DayOfMonth]"
+                      dataType="i4"
+                      name="DayOfMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[DayOfYear]"
+                      dataType="i4"
+                      name="DayOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[WeekOfYear]"
+                      dataType="i4"
+                      name="WeekOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[MonthOfYear]"
+                      dataType="i4"
+                      name="MonthOfYear" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[Quarter]"
+                      dataType="i4"
+                      name="Quarter" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[Year]"
+                      dataType="i4"
+                      name="Year" />
+                    <externalMetadataColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output].ExternalColumns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="IsWeekDay" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[Ship_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[Ship_Date]"
+                      name="Ship_Date" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DayOfWeek]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DayOfWeek]"
+                      name="DayOfWeek" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DayOfMonth]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DayOfMonth]"
+                      name="DayOfMonth" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DayOfYear]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[DayOfYear]"
+                      name="DayOfYear" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[WeekOfYear]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[WeekOfYear]"
+                      name="WeekOfYear" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[MonthOfYear]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[MonthOfYear]"
+                      name="MonthOfYear" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[Quarter]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[Quarter]"
+                      name="Quarter" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[Year]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[Year]"
+                      name="Year" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[IsWeekDay]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[IsWeekDay]"
+                      name="IsWeekDay" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage ShipDate.Paths[OLE DB Source Output]"
+              endId="Package\Stage ShipDate\DST – stgShipDate.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage ShipDate\SRC – SuperStore_ShipOrder.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA453338-8549-4827-B459-C70CC9ACF324}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage OrderDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C13CA089-E416-49EF-8301-61D364C96B14}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Stage Product" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{CC59B0C7-74F6-4014-87D8-C4416862B4A8}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Stage Order" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{0C1A01AB-F6D1-43C5-99CE-3A5D496BCAF4}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Stage Custumer" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{21AF14EC-F76D-4AAD-928B-90E5EEAD332A}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Stage ShipDate" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Execute SQL Task"
+          TopLeft="350.714291686915,24.4705885784849" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Stage Custumer"
+          TopLeft="533.571437658096,235.529415067917" />
+        <NodeLayout
+          Size="135.2,41.6"
+          Id="Package\Stage Order"
+          TopLeft="367.142863395263,240.117650426383" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Stage OrderDate"
+          TopLeft="40.7142864076459,116.235295747803" />
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\Stage Product"
+          TopLeft="165.000002809933,231.705885602528" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Stage ShipDate"
+          TopLeft="660.714296966183,111.647060389337" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="380.447625020248,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-261.333338612602,50.1647071693183"
+              Start="0,0"
+              End="-261.333338612602,42.6647071693183">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.44558858023797" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.44558858023797"
+                    Point2="0,13.445588580238"
+                    Point3="-4,13.445588580238" />
+                  <mssgle:LineSegment
+                    End="-257.333338612602,13.445588580238" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-257.333338612602,13.445588580238"
+                    Point2="-261.333338612602,13.445588580238"
+                    Point3="-261.333338612602,17.445588580238" />
+                  <mssgle:LineSegment
+                    End="-261.333338612602,42.6647071693183" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="405.914291686915,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-168.914288876982,165.635297024044"
+              Start="0,0"
+              End="-168.914288876982,158.135297024044">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.2284440862294" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,63.2284440862294"
+                    Point2="0,67.2284440862294"
+                    Point3="-4,67.2284440862294" />
+                  <mssgle:LineSegment
+                    End="-164.914288876982,67.2284440862294" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-164.914288876982,67.2284440862294"
+                    Point2="-168.914288876982,67.2284440862294"
+                    Point3="-168.914288876982,71.2284440862294" />
+                  <mssgle:LineSegment
+                    End="-168.914288876982,158.135297024044" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="433.328577541089,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,174.047061847898"
+              Start="0,0"
+              End="0,166.547061847898">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,166.547061847898" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="457.647625020248,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="152.723812637848,169.458826489432"
+              Start="0,0"
+              End="152.723812637848,161.958826489432">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.7754847020524" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,64.7754847020524"
+                    Point2="0,68.7754847020524"
+                    Point3="4,68.7754847020524" />
+                  <mssgle:LineSegment
+                    End="148.723812637848,68.7754847020524" />
+                  <mssgle:CubicBezierSegment
+                    Point1="148.723812637848,68.7754847020524"
+                    Point2="152.723812637848,68.7754847020524"
+                    Point3="152.723812637848,72.7754847020524" />
+                  <mssgle:LineSegment
+                    End="152.723812637848,161.958826489432" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="478.234291686915,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="257.680005279269,45.5764718108524"
+              Start="0,0"
+              End="257.680005279269,38.0764718108524">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.69492881428785" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.69492881428785"
+                    Point2="0,13.6949288142878"
+                    Point3="4,13.6949288142878" />
+                  <mssgle:LineSegment
+                    End="253.680005279269,13.6949288142878" />
+                  <mssgle:CubicBezierSegment
+                    Point1="253.680005279269,13.6949288142878"
+                    Point2="257.680005279269,13.6949288142878"
+                    Point3="257.680005279269,17.6949288142878" />
+                  <mssgle:LineSegment
+                    End="257.680005279269,38.0764718108524" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Stage Custumer">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Stage Custumer\DST – stgCustomer"
+          TopLeft="493,195" />
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Stage Custumer\SRC – SuperStore_Customer"
+          TopLeft="483,66" />
+        <EdgeLayout
+          Id="Package\Stage Custumer.Paths[OLE DB Source Output]"
+          TopLeft="589.4,107.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.6,87.4"
+              Start="0,0"
+              End="-11.6,79.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.7" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.7"
+                    Point2="0,43.7"
+                    Point3="-4,43.7" />
+                  <mssgle:LineSegment
+                    End="-7.60000000000002,43.7" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.60000000000002,43.7"
+                    Point2="-11.6,43.7"
+                    Point3="-11.6,47.7" />
+                  <mssgle:LineSegment
+                    End="-11.6,79.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Custumer\DST – stgCustomer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Custumer\SRC – SuperStore_Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Order">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\Stage Order\SRC – SuperStore_Order"
+          TopLeft="421,146" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\Stage Order\DST - stgOrder"
+          TopLeft="445,257" />
+        <EdgeLayout
+          Id="Package\Stage Order.Paths[OLE DB Source Output]"
+          TopLeft="519,187.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.4000000000001"
+              Start="0,0"
+              End="0,61.9000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.9000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Order\DST - stgOrder">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Order\SRC – SuperStore_Order">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage OrderDate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="216.8,41.6"
+          Id="Package\Stage OrderDate\SRC – SuperStore_OrderDate"
+          TopLeft="298.142855220911,58.5882351761458" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\Stage OrderDate\DST – stgOrderDate"
+          TopLeft="336.28571265571,201.647058748456" />
+        <EdgeLayout
+          Id="Package\Stage OrderDate.Paths[OLE DB Source Output]"
+          TopLeft="406.542855220911,100.188235176146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16.5428574347983,101.458823572311"
+              Start="0,0"
+              End="16.5428574347983,93.9588235723106">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.7294117861553" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.7294117861553"
+                    Point2="0,50.7294117861553"
+                    Point3="4,50.7294117861553" />
+                  <mssgle:LineSegment
+                    End="12.5428574347983,50.7294117861553" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.5428574347983,50.7294117861553"
+                    Point2="16.5428574347983,50.7294117861553"
+                    Point3="16.5428574347983,54.7294117861553" />
+                  <mssgle:LineSegment
+                    End="16.5428574347983,93.9588235723106" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage OrderDate\DST – stgOrderDate">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage OrderDate\SRC – SuperStore_OrderDate">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Product">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Stage Product\SRC – SuperStore_Product"
+          TopLeft="415,120" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\Stage Product\DST – stgProducts"
+          TopLeft="462,282" />
+        <EdgeLayout
+          Id="Package\Stage Product.Paths[OLE DB Source Output]"
+          TopLeft="516.6,161.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.8,120.4"
+              Start="0,0"
+              End="27.8,112.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,56.2"
+                    Point2="0,60.2"
+                    Point3="4,60.2" />
+                  <mssgle:LineSegment
+                    End="23.8,60.2" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.8,60.2"
+                    Point2="27.8,60.2"
+                    Point3="27.8,64.2" />
+                  <mssgle:LineSegment
+                    End="27.8,112.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Product\DST – stgProducts">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Product\SRC – SuperStore_Product">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage ShipDate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Stage ShipDate\SRC – SuperStore_ShipOrder"
+          TopLeft="335,61" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Stage ShipDate\DST – stgShipDate"
+          TopLeft="350,249" />
+        <EdgeLayout
+          Id="Package\Stage ShipDate.Paths[OLE DB Source Output]"
+          TopLeft="449,103">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16,146"
+              Start="0,0"
+              End="-16,138.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,69"
+                    Point2="0,73"
+                    Point3="-4,73" />
+                  <mssgle:LineSegment
+                    End="-12,73" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12,73"
+                    Point2="-16,73"
+                    Point3="-16,77" />
+                  <mssgle:LineSegment
+                    End="-16,138.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage ShipDate\DST – stgShipDate">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage ShipDate\SRC – SuperStore_ShipOrder">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
